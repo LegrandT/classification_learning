@@ -209,7 +209,7 @@ kmeanAve = []
 #     LPave.append([])
 #     rakelAve.append([])
 
-for r in range(10):
+for r in range(1000):
 
 
     # shuffle the data to have homogene data (avoid having whole folder of same class)
