@@ -7,8 +7,8 @@ import matplotlib.pyplot as plt
 iris = datasets.load_iris()
 
 
-def binDi(x, n, p):
-    return (factorial(n) / (factorial(n - x) * factorial(x))) * pow(p, x) * pow(1 - p, n - x)
+# def binDi(x, n, p):
+#     return (factorial(n) / (factorial(n - x) * factorial(x))) * pow(p, x) * pow(1 - p, n - x)
 
 
 def getLabel(train):
@@ -54,7 +54,7 @@ def kmean(xtrain, k):
                 temp.append(eucliDist(xtrain[i], centers[j]))
             distances.append(temp)
 
-        # temporary label all training data in closest center
+        # temporary label all training data with there closest center
         for i in range(len(centers)):
             clusters.append([])
         for i in range(len(xtrain)):
@@ -89,6 +89,7 @@ def kmeancl(centers, x):
     return euclids.index(min(euclids))
 
 
+# to check what .. is the right one
 def kmeanMaxAcc(predict, acc):
     accuracies = []
     for l in range(len(predict[0])-1):
@@ -209,7 +210,9 @@ kmeanAve = []
 #     LPave.append([])
 #     rakelAve.append([])
 
-for r in range(1000):
+
+
+for r in range(10):
 
 
     # shuffle the data to have homogene data (avoid having whole folder of same class)
@@ -405,10 +408,10 @@ for r in range(1000):
 
             #
             # yCW = []
-            # for i in range(len(y)):
+            # for i in range(len(ytrain)):
             #     temp = []
-            #     for j in range(len(y[0])):
-            #         if y[i][j] == 1:
+            #     for j in range(len(ytrain[0])):
+            #         if ytrain[i][j] == 1:
             #             temp.append(j)
             #     yCW.append(temp)
             #
