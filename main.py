@@ -88,7 +88,7 @@ def kmeancl(centers, x):
         euclids.append(eucliDist(centers[i], x))
     return euclids.index(min(euclids))
 
-#
+
 # to check what .. is the right one
 def kmeanMaxAcc(predict, acc):
     accuracies = []
