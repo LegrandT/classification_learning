@@ -204,15 +204,26 @@ LPave = []
 rakelAve = []
 kmeanAve = []
 
+# define the range for the k in knn
+firstK = 17
+lastK = 17
+krange = range(firstK, lastK + 1)
 
-# for i in range(75):
-#     BRave.append([])
-#     LPave.append([])
-#     rakelAve.append([])
+oneK = True # if we already chosed a k
+
+iterations = 10 # number of iterations
+
+if firstK != lastK:
+    oneK = False
+    for i in range(len(krange)):
+        BRave.append([])
+        LPave.append([])
+        rakelAve.append([])
+        kmeanAve.append([])
 
 
 
-for r in range(10):
+for r in range(iterations):
 
 
     # shuffle the data to have homogene data (avoid having whole folder of same class)
@@ -222,13 +233,14 @@ for r in range(10):
 
 
 
-    knearResultBR = []
-    knearResultLP = []
-    knearResultrakel = []
+    # knearResultBR = []
+    # knearResultLP = []
+    # knearResultrakel = []
+    # knearResultKmean = []
 
 
     # test different k for the knn
-    for k in range(17, 18):
+    for k in krange:
         print(k)
 
         # data divided in 10 folder for cross validation
@@ -238,6 +250,7 @@ for r in range(10):
         BRacc = []
         LPacc = []
         rakelacc = []
+        Kmeanacc = []
 
         # for each folder to be taken as test data
         for p in range(kfolder):
@@ -264,7 +277,7 @@ for r in range(10):
                 temp[discovered[i]] = 1
                 discovered[i] = temp
 
-            kmeanAve.append(kmeanMaxAcc(ytest, discovered))
+            Kmeanacc.append(kmeanMaxAcc(ytest, discovered))
 
             # Binary relevance
             #  can create one mor label, when classification
@@ -426,39 +439,37 @@ for r in range(10):
             #     CWresult.append(temp)
             # print(yCW)
 
-        BRave.append(sum(BRacc) / len(BRacc))
-        LPave.append(sum(LPacc) / len(LPacc))
-        rakelAve.append(sum(rakelacc) / len(rakelacc))
+        if oneK:
+            BRave.append(sum(BRacc) / len(BRacc))
+            LPave.append(sum(LPacc) / len(LPacc))
+            rakelAve.append(sum(rakelacc) / len(rakelacc))
+            kmeanAve.append(sum(Kmeanacc) / len(Kmeanacc))
+        else:
+            BRave[k-firstK].append(sum(BRacc) / len(BRacc))
+            LPave[k-firstK].append(sum(LPacc) / len(LPacc))
+            rakelAve[k-firstK].append(sum(rakelacc) / len(rakelacc))
+            kmeanAve[k-firstK].append(sum(Kmeanacc) / len(Kmeanacc))
 
-
-
-# for r in range(20):
-#     BRave = sum(BRave) / len(BRave)
-#     LPave = sum(LPave) / len(LPave)
-#     rakelAve = sum(rakelAve) / len(rakelAve)
-#     kmeanAve = sum(kmeanAve) / len(kmeanAve)
-#
-# del BRave[0]
-# del LPave[0]
-# del rakelAve[0]
-
-BRave = sum(BRave)/len(BRave)
-LPave = sum(LPave)/len(LPave)
-rakelAve = sum(rakelAve) / len(rakelAve)
-kmeanAve = sum(kmeanAve) / len(kmeanAve)
-
-
-# if len(BRave) > 1:
-#     xaxe = []
-#     for i in range(1, 75):
-#         xaxe.append(i)
-#     plt.plot(xaxe, BRave, 'b', label='Binary relevance')
-#     plt.plot(xaxe, LPave, 'g', label='Label powerset')
-#     plt.plot(xaxe, rakelAve, 'r', label='rakel')
-#     plt.legend()
-#     plt.show()
-# else:
-print('K-mean clutering accuracy is', kmeanAve, '%')
-print('Binary relevance accuracy is', BRave, '%')
-print('Label powerset accuracy is', LPave, '%')
-print('Rakel result accuracy is', rakelAve, '%')
+if oneK :
+    BRave = sum(BRave) / len(BRave)
+    LPave = sum(LPave) / len(LPave)
+    rakelAve = sum(rakelAve) / len(rakelAve)
+    kmeanAve = sum(kmeanAve) / len(kmeanAve)
+    print('K-mean clutering accuracy is', kmeanAve, '%')
+    print('Binary relevance accuracy is', BRave, '%')
+    print('Label powerset accuracy is', LPave, '%')
+    print('Rakel result accuracy is', rakelAve, '%')
+else:
+    for r in range(len(krange)):
+        BRave[r] = sum(BRave[r]) / len(BRave[r])
+        LPave[r] = sum(LPave[r]) / len(LPave[r])
+        rakelAve[r] = sum(rakelAve[r]) / len(rakelAve[r])
+        kmeanAve[r] = sum(kmeanAve[r]) / len(kmeanAve[r])
+    xaxe = []
+    for i in krange:
+        xaxe.append(i)
+    plt.plot(xaxe, BRave, 'b', label='Binary relevance')
+    plt.plot(xaxe, LPave, 'g', label='Label powerset')
+    plt.plot(xaxe, rakelAve, 'r', label='rakel')
+    plt.legend()
+    plt.show()

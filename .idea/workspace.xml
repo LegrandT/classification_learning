@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fad0e87a-47cc-4a8d-b9c6-286185f76dee" name="Default Changelist" comment="" />
+    <list default="true" id="fad0e87a-47cc-4a8d-b9c6-286185f76dee" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,8 +19,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="109" lean-forward="true" selection-start-line="109" selection-end-line="109" />
+            <state relative-caret-position="40">
+              <caret line="362" column="50" lean-forward="true" selection-start-line="362" selection-start-column="50" selection-end-line="362" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -44,7 +47,7 @@
       <find>2</find>
       <find>label</find>
       <find>l</find>
-      <find>l</find>
+      <find>knearResultBR</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -58,11 +61,11 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="93" />
-    <option name="y" value="3" />
-    <option name="width" value="1825" />
-    <option name="height" value="1090" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="120" />
+    <option name="y" value="-20" />
+    <option name="width" value="1723" />
+    <option name="height" value="960" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -265,7 +268,14 @@
       <option name="project" value="LOCAL" />
       <updated>1548953567635</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="completelly implemented code, need to compare handmade and sklearn k-mean">
+      <created>1548954148434</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1548954148434</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -278,21 +288,22 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-23" y="25" width="1460" height="872" extended-state="0" />
+    <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4990476" visible="true" weight="0.08151792" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4990476" visible="true" weight="0.07666887" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.50095236" side_tool="true" weight="0.040317252" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32707775" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49613494" weight="0.2945946" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4957039" visible="true" weight="0.2935657" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49790794" weight="1.0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Version Control" order="6" />
       <window_info anchor="bottom" id="TODO" order="7" weight="0.32841823" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.3297587" />
-      <window_info active="true" anchor="bottom" id="Event Log" order="9" sideWeight="0.50386506" side_tool="true" visible="true" weight="0.16891892" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5042961" side_tool="true" visible="true" weight="0.2935657" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.3292683" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -324,8 +335,8 @@
     <entry file="file://$PROJECT_DIR$/.idea/main.py" />
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="109" lean-forward="true" selection-start-line="109" selection-end-line="109" />
+        <state relative-caret-position="40">
+          <caret line="362" column="50" lean-forward="true" selection-start-line="362" selection-start-column="50" selection-end-line="362" selection-end-column="50" />
         </state>
       </provider>
     </entry>
