@@ -124,7 +124,6 @@ def muCl(xtraining, ytraining, x, knear):
     kcount = [0]*len(classes)
     for i in range(knear):
         for j in range(len(classes)):
-            # print(i, knear, nearest[i][0], ytraining[nearest[i][0]], classes[j])
             if ytraining[nearest[i][0]] == classes[j]:
                 kcount[j] += 1
 
