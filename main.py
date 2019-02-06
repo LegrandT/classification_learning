@@ -11,6 +11,7 @@ iris = datasets.load_iris()
 #     return (factorial(n) / (factorial(n - x) * factorial(x))) * pow(p, x) * pow(1 - p, n - x)
 
 
+# gets the different labels in a list of labels
 def getLabel(train):
     labels = []
     for i in range(len(train)):
@@ -18,6 +19,7 @@ def getLabel(train):
             labels.append(train[i])
     return labels
 
+#calculate euclidean distance
 def eucliDist(a, b):
     d = 0
     for i in range(len(a)):
@@ -62,7 +64,7 @@ def kmean(xtrain, k):
                 if distances[i][j] == min(distances[i]):
                     clusters[j].append(xtrain[i])
 
-        # move the class center in the mean of the points in it's class
+        # move the class center at the mean of the points in its class
         for i in range(len(clusters)):
             clusters[i] = list(map(list, zip(*clusters[i])))
         for i in range(len(centers)):
@@ -75,10 +77,10 @@ def kmean(xtrain, k):
                     centers[i][j] = sum(clusters[i][j])/len(clusters[i][j])
 
         # if difference between old and new centers is lower that threshold, center are considerate found
-        change = 0
+        diff = 0
         for i in range(len(centers)):
-            change += eucliDist(oldCenters[i], centers[i])
-        if change < 0.00000001:
+            diff += eucliDist(oldCenters[i], centers[i])
+        if diff < 0.00000001:
             return centers
 
 
@@ -89,7 +91,7 @@ def kmeancl(centers, x):
     return euclids.index(min(euclids))
 
 
-# to check what .. is the right one
+# to check what permutation gives the right classes corresponding to the clustering
 def kmeanMaxAcc(predict, acc):
     accuracies = []
     for l in range(len(predict[0])-1):
@@ -108,30 +110,31 @@ def kmeanMaxAcc(predict, acc):
     return max(accuracies)
 
 
-def muCl(xtraining, ytraining, x, knear):
+# classification using knn
+def muCl(x_training, ytraining, x, knear):
     nearest = {}
-    for i in range(len(xtraining)):
-        nearest[i] = eucliDist(xtraining[i], x)
+    for i in range(len(x_training)):
+        nearest[i] = eucliDist(x_training[i], x)
     nearest = sorted(nearest.items(), key=operator.itemgetter(1))
 
     classes = getLabel(ytraining)
-    classcount = [0]*len(classes)
+    class_count = [0]*len(classes)
     for i in range(len(ytraining)):
         for j in range(len(classes)):
             if ytraining[i] == classes[j]:
-                classcount[j] +=1
+                class_count[j] +=1
 
-    kcount = [0]*len(classes)
+    k_count = [0]*len(classes)
     for i in range(knear):
         for j in range(len(classes)):
             if ytraining[nearest[i][0]] == classes[j]:
-                kcount[j] += 1
+                k_count[j] += 1
 
-    kprob = [0]*len(classes)
-    for i in range(len(kprob)):
-        kprob[i] = ((kcount[i]/classcount[i])*(classcount[i]/len(ytraining))) # /knear/len(xtraining)
+    # kprob = [0]*len(classes)
+    # for i in range(len(kprob)):
+    #     kprob[i] = ((k_count[i]/class_count[i])*(class_count[i]/len(ytraining))) # /knear/len(x_training)
 
-    result = classes[kprob.index(max(kprob))]
+    result = classes[k_count.index(max(k_count))]
 
     # result = []
     # for i in range(len(labels)):
@@ -229,13 +232,6 @@ for r in range(iterations):
     tempshuffle = list(zip(x, y))
     random.shuffle(tempshuffle)
     x, y = zip(*tempshuffle)
-
-
-
-    # knearResultBR = []
-    # knearResultLP = []
-    # knearResultrakel = []
-    # knearResultKmean = []
 
 
     # test different k for the knn
@@ -384,16 +380,17 @@ for r in range(iterations):
             rakelacc.append(Accuracy(ytest, rakelresults))
 
 
-            # pairwise
-            # could be use to decide for a equality or two classes in case of classification
-
-            # if we do 4class proble, same principle that rakel
+            # # pairwise
+            # # could be use to decide for a equality or two classes in case of classification
             #
+            # # if we do 4class problem, same principle that rakel
+            # #
+            # #
             # y1v2 = {}
             # y1v3 = {}
             # y2v3 = {}
             #
-            # for i in range(len(x)):
+            # for i in range(len(xtrain)):
             #     if ytrain[i][0] != ytrain[i][1]:
             #         y1v2[i] = ytrain[i][0]
             #     if ytrain[i][0] != ytrain[i][2]:
@@ -401,24 +398,25 @@ for r in range(iterations):
             #     if ytrain[i][1] != ytrain[i][2]:
             #         y2v3[i] = ytrain[i][1]
             #
+            # # example with 1 or 2
             # x1or2 = []
             # y1or2 = []
+            #
             # for i in range(len(y1v2)):
-            #     x1or2.append(xtrain[list(y1v2)[i]])
-            #     y1or2.append(y1v2[i])
+            #     x1or2.append(xtrain[list(y1v2.keys())[i]])
+            #     y1or2.append(list(y1v2.values())[i])
             #
             # result1or2 = []
             # for i in range(len(xtest)):
-            #     result1or2.append(muCl(x1or2, y1or2, xtest[i]))
-
+            #     result1or2.append(muCl(x1or2, y1or2, xtest[i], k))
+            #
             # print(result1or2)
 
 
 
-            # copy-weight
-            # same than LP with multi classification since weight is always 1 (one label per instance)
-
-            #
+            # # copy-weight
+            # # same than LP with multi classification since weight is always 1 (one label per instance)
+            # # not finished
             # yCW = []
             # for i in range(len(ytrain)):
             #     temp = []
@@ -426,7 +424,6 @@ for r in range(iterations):
             #         if ytrain[i][j] == 1:
             #             temp.append(j)
             #     yCW.append(temp)
-            #
             # CWresult = []
             # for i in range():
             #     temp = []
